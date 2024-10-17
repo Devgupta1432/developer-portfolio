@@ -8,7 +8,7 @@ export const personalData = {
   address: 'Huda sector-2 Palwal, Haryana - 121102 ',
   github: 'https://github.com/Devgupta1432',
   facebook: '',
-  linkedIn: 'linkedin.com/in/dev-gupta-0b4b461b5',
+  linkedIn: 'https://linkedin.com/in/dev-gupta-0b4b461b5',
   twitter: '',
   stackOverflow: '',
   leetcode: "",
