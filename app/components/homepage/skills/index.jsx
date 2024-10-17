@@ -27,7 +27,7 @@ function Skills() {
       </div>
 
       {/* Skills Display Section */}
-      <div className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-4 my-12 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-6 gap-4 my-12 px-4">
         {skillsData.map((skill, id) => (
           <div
             className="flex flex-col items-center justify-center transition-all duration-500 m-3 rounded-lg group relative hover:scale-[1.05] cursor-pointer"
