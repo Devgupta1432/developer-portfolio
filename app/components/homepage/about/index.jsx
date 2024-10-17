@@ -28,7 +28,7 @@ function AboutSection() {
           <Image
             src={personalData.profile}
             width={320}
-            height={320}
+            height={300}
             alt="Dev gupta"
             className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer shadow-lg"
           />
