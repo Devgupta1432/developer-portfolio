@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/p.png" /> {/* Adjust the path if needed */}
+        <link rel="icon" href="/f.png" /> {/* Adjust the path if needed */}
         {/* Add other head tags here if needed */}
       </head>
       <body className={inter.className}>
