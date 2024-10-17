@@ -16,7 +16,7 @@ function ProjectCard({ project }) {
   };
 
   return (
-    <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full max-w-[400px] lg:max-w-[450px] h-[500px] overflow-hidden transition-transform duration-300 ease-out hover:scale-105">
+    <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full max-w-[400px] lg:max-w-[450px] h-[420px] overflow-hidden transition-transform duration-300 ease-out hover:scale-105">
       {/* Top Gradient Divider */}
       <div className="flex flex-row">
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
