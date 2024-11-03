@@ -1,5 +1,4 @@
-// @flow strict
-"use client"; // Add this directive at the top to use client-side features
+"use client"; // Ensure this directive is at the top of the file
 
 import * as React from 'react';
 import Image from 'next/image';
@@ -8,15 +7,20 @@ import { FaCode, FaPlay } from 'react-icons/fa';
 import placeholder from '/public/png/placeholder.png';
 
 function ProjectCard({ project }) {
-  const { name, description, tools = [], tags = [], code, demo, image, role } = project || {};
+  const { name, description, tools = [], tags = [], code, demo, image, role, behance } = project || {};
   const [showFullDescription, setShowFullDescription] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const toggleDescription = () => {
     setShowFullDescription((prev) => !prev);
   };
 
   return (
-    <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full max-w-[400px] lg:max-w-[450px] h-[420px] overflow-hidden transition-transform duration-300 ease-out hover:scale-105">
+    <div 
+      className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full max-w-[400px] lg:max-w-[450px] h-[500px] overflow-hidden transition-transform duration-300 ease-out hover:scale-105"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Top Gradient Divider */}
       <div className="flex flex-row">
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
@@ -35,22 +39,51 @@ function ProjectCard({ project }) {
         </p>
       </div>
 
-      {/* Project Image */}
-      <div className="overflow-hidden h-[150px] lg:h-[180px]">
+      {/* Project Image with Blur Effect on Hover */}
+      <div className="relative overflow-hidden h-[150px] lg:h-[180px]">
         <Image 
           src={image || placeholder} 
           alt={`${name} project image`} 
           layout="responsive" 
           width={400} 
           height={250} 
-          className="object-cover" 
+          className={`object-cover transition duration-300 ${isHovered ? 'filter blur-sm' : ''}`} 
         />
+        
+        {/* Button Container for Demo and Code */}
+        <div className={`absolute inset-0 flex items-center justify-center space-x-2 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+          {demo && (
+            <Link href={demo} target="_blank" rel="noopener noreferrer">
+              <div className="text-blue-500 border border-blue-500 p-2 rounded-md flex items-center cursor-pointer hover:bg-blue-500 hover:text-white transition duration-300">
+                <FaPlay className="mr-1" /> Demo
+              </div>
+            </Link>
+          )}
+          {code && (
+            <Link href={code} target="_blank" rel="noopener noreferrer">
+              <div className="text-gray-800 border border-gray-800 p-2 rounded-md flex items-center cursor-pointer hover:bg-gray-800 hover:text-white transition duration-300">
+                <FaCode className="mr-1" /> Code
+              </div>
+            </Link>
+          )}
+        </div>
+
+        {/* Behance Button - Only visible on hover and positioned over the image */}
+        {isHovered && behance && (
+          <div className="absolute bottom-5 top-20 left-1/2 transform -translate-x-1/2">
+            <Link href={behance} target="_blank" rel="noopener noreferrer">
+              <div className="text-black border border-black  p-2 rounded-md shadow-md bg-white hover:bg-black hover:text-white transition duration-300 cursor-pointer">
+                View on Behance
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Project Details - Scrollable Content */}
       <div className="border-t-[2px] border-indigo-900 px-4 lg:px-6 py-2 flex-1 overflow-y-auto max-h-[252px]">
-        <p className="text-white text-sm lg:text-base"><strong>Role:</strong> {role || "Not specified"}</p>
-        <p className="text-white text-sm lg:text-base">
+        <p className="text-red-400 text-sm lg:text-base"><strong>Role:</strong> {role || "Not specified"}</p>
+        <p className="text-yellow-400 text-sm lg:text-base">
           <strong>Description:</strong> {showFullDescription ? description : `${description.substring(0, 100)}...`}
           {description.length > 100 && (
             <button
@@ -61,7 +94,7 @@ function ProjectCard({ project }) {
             </button>
           )}
         </p>
-        <p className="text-white text-sm lg:text-base"><strong>Tools:</strong> {tools.join(", ") || "None"}</p>
+        <p className="text-green-400 text-sm lg:text-base"><strong>Tools:</strong> {tools.join(", ") || "None"}</p>
       </div>
 
       {/* Tags Section */}
@@ -74,24 +107,6 @@ function ProjectCard({ project }) {
           ))}
         </div>
       )}
-
-      {/* View More Button */}
-      <div className="px-4 lg:px-6 py-2 flex justify-end space-x-2">
-        {demo && (
-          <Link href={demo} passHref>
-            <a className="bg-blue-500 text-white p-1 rounded-md flex items-center">
-              <FaPlay className="mr-1" /> Demo
-            </a>
-          </Link>
-        )}
-        {code && (
-          <Link href={code} passHref>
-            <a className="bg-gray-800 text-white p-1 rounded-md flex items-center">
-              <FaCode className="mr-1" /> Code
-            </a>
-          </Link>
-        )}
-      </div>
     </div>
   );
 }
